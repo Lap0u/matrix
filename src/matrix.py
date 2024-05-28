@@ -76,7 +76,10 @@ class Matrix:
 
         return Matrix(
             [
-                [lerp_compute(v1[i][j], v2[i][j], scalar) for j in range(v1.shape[1])]
+                [
+                    lerp_compute(v1.data[i][j], v2.data[i][j], scalar)
+                    for j in range(v1.shape[1])
+                ]
                 for i in range(v1.shape[0])
             ]
         )

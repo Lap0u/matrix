@@ -28,7 +28,13 @@ def main():
 
     print("\033[1m\033[96mEx02\033[0m")
     # lerp
-    print(matrix1.lerp(matrix1, matrix2, 0.4))
+    print(
+        matrix1.lerp(
+            Matrix([[2.0, 1.0], [3.0, 4.0]]),
+            Matrix([[20.0, 10.0], [30.0, 40.0]]),
+            0.5,
+        )
+    )
     print(matrix1.lerp(ns_matrix1, ns_matrix2, 0.5))
 
 
