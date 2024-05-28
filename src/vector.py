@@ -46,6 +46,8 @@ class Vector:
         )
 
     def lerp(self, v1, v2, scalar):
+        """Return the linear interpolation of vector or scalar"""
+
         def lerp_compute(val1, val2, scalar):
             print(val1, val2)
             return val1 + (val2 - val1) * scalar
@@ -67,3 +69,9 @@ class Vector:
         return Vector(
             [lerp_compute(val1, val2, scalar) for val1, val2 in zip(v1.data, v2.data)]
         )
+
+    def dot_product(self, other):
+        """Returns the dot product of two vectors."""
+        if self.shape != other.shape:
+            return None
+        return sum([self.data[i] * other.data[i] for i in range(self.shape)])

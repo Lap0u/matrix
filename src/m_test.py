@@ -36,6 +36,8 @@ def main():
         )
     )
     print(matrix1.lerp(ns_matrix1, ns_matrix2, 0.5))
+    # dot product
+    print
 
 
 if __name__ == "__main__":

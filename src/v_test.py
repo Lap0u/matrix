@@ -51,6 +51,11 @@ def main():
     print(vector1.lerp(21.0, 42.0, 0.3))
     print(vector1.lerp(Vector([2.0, 1.0]), Vector([4.0, 2.0]), 0.3))
 
+    print("\033[1m\033[96mEx03\033[0m")
+    # dot product
+    print(vector1.dot_product(vector2))
+    print(v1.dot_product(v2))
+
 
 if __name__ == "__main__":
     main()
