@@ -1,4 +1,5 @@
 from matrix import Matrix
+from vector import Vector
 
 
 def main():
@@ -36,8 +37,82 @@ def main():
         )
     )
     print(matrix1.lerp(ns_matrix1, ns_matrix2, 0.5))
-    # dot product
-    print
+
+    print("\033[1m\033[96mEx07\033[0m")
+    # Matrix multiplication by vector
+
+    u = Matrix(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+        ]
+    )
+
+    v = Vector([4.0, 2.0])
+    print(u.mul_vec(v))
+    u = Matrix(
+        [
+            [2.0, 0.0],
+            [0.0, 2.0],
+        ]
+    )
+    v = Vector([4.0, 2.0])
+    print(u.mul_vec(v))
+    u = Matrix(
+        [
+            [2.0, -2.0],
+            [-2.0, 2.0],
+        ]
+    )
+    v = Vector([4.0, 2.0])
+    print(u.mul_vec(v))
+
+    # Matrix multiplication by matrix
+
+    u = Matrix(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+        ]
+    )
+    v = Matrix(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+        ]
+    )
+    print(u.mul_mat(v))
+    u = Matrix(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+        ]
+    )
+    v = Matrix(
+        [
+            [2.0, 1.0],
+            [4.0, 2.0],
+        ]
+    )
+    print(u.mul_mat(v))
+    u = Matrix(
+        [
+            [3.0, -5.0],
+            [6.0, 8.0],
+        ]
+    )
+    v = Matrix(
+        [
+            [2.0, 1.0],
+            [4.0, 2.0],
+        ]
+    )
+    print(u.mul_mat(v))
+
+    u = Matrix([[3, 1], [2, 2], [1, 1]])
+    v = Matrix([[3, 1], [2, 2]])
+
+    print(u.mul_mat(v))
 
 
 if __name__ == "__main__":

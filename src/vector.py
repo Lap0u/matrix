@@ -106,3 +106,4 @@ class Vector:
         b = self.data[2] * other.data[0] - self.data[0] * other.data[2]
         c = self.data[0] * other.data[1] - self.data[1] * other.data[0]
         return Vector([a, b, c])
+    

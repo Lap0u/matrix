@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from vector import Vector
 
 
 @dataclass
@@ -83,3 +84,21 @@ class Matrix:
                 for i in range(v1.shape[0])
             ]
         )
+
+    def mul_vec(self, other):
+        """Return the multiplication of a matrix by a vector"""
+        if self.shape[1] != other.shape:
+            print("cant")
+            return None
+        return Vector(
+            [
+                sum([(other.data[j] * self.data[j][i]) for j in range(other.shape)])
+                for i in range(self.shape[1])
+            ]
+        )
+
+    def mul_mat(self, other):
+        """Return the multiplication of a matrix by a matrix"""
+        if self.shape[1] != other.shape[0]:
+            print("cant")
+            return None
