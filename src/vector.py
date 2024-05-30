@@ -75,3 +75,34 @@ class Vector:
         if self.shape != other.shape:
             return None
         return sum([self.data[i] * other.data[i] for i in range(self.shape)])
+
+    def norm_1(self):
+        """Returns the L1 norm of the vector.(sum of its values)"""
+        return sum([abs(val) for val in self.data])
+
+    def norm(self):
+        """Returns the L2 norm of the vector.(square root of the sum of its values squared)"""
+        return sum([val**2 for val in self.data]) ** 0.5
+
+    def norm_inf(self):
+        """Returns the L∞ norm of the vector.(maximum of its values)"""
+        return max([abs(val) for val in self.data])
+
+    def angle_cos(self, other):
+        """Returns the cosine of the angle between two vectors
+        Cosine rule : c² = a² + b² - 2ab * cos(C)
+        """
+        if self.shape != other.shape:
+            return None
+        if self.shape == 0:
+            return None
+        return self.dot_product(other) / (self.norm() * other.norm())
+
+    def cross_product(self, other):
+        """Return the cross product between 2 3D vectors"""
+        if self.shape != 3 or other.shape != 3:
+            return None
+        a = self.data[1] * other.data[2] - self.data[2] * other.data[1]
+        b = self.data[2] * other.data[0] - self.data[0] * other.data[2]
+        c = self.data[0] * other.data[1] - self.data[1] * other.data[0]
+        return Vector([a, b, c])

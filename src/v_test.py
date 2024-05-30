@@ -56,6 +56,44 @@ def main():
     print(vector1.dot_product(vector2))
     print(v1.dot_product(v2))
 
+    print("\033[1m\033[96mEx04\033[0m")
+    u = Vector([0.0, 0.0, 0.0])
+    print(u.norm_1(), u.norm(), u.norm_inf())
+    u = Vector([1.0, 2.0, 3.0])
+    print(u.norm_1(), u.norm(), u.norm_inf())
+    u = Vector([-1.0, -2.0])
+    print(u.norm_1(), u.norm(), u.norm_inf())
+
+    print("\033[1m\033[96mEx05\033[0m")
+    # cosine computation
+    u = Vector([1.0, 0.0])
+    v = Vector([1.0, 0.0])
+    print(u.angle_cos(v))
+    u = Vector([1.0, 0.0])
+    v = Vector([0.0, 1.0])
+    print(u.angle_cos(v))
+    u = Vector([-1.0, 1.0])
+    v = Vector([1.0, -1.0])
+    print(u.angle_cos(v))
+    u = Vector([2.0, 1.0])
+    v = Vector([4.0, 2.0])
+    print(u.angle_cos(v))
+    u = Vector([1.0, 2.0, 3.0])
+    v = Vector([4.0, 5.0, 6.0])
+    print(u.angle_cos(v))
+
+    print("\033[1m\033[96mEx05\033[0m")
+    # cross product of two 3D vectors
+    u = Vector([0.0, 0.0, 1.0])
+    v = Vector([1.0, 0.0, 0.0])
+    print(u.cross_product(v))
+    u = Vector([1.0, 2.0, 3.0])
+    v = Vector([4.0, 5.0, 6.0])
+    print(u.cross_product(v))
+    u = Vector([4.0, 2.0, -3.0])
+    v = Vector([-2.0, -5.0, 16.0])
+    print(u.cross_product(v))
+
 
 if __name__ == "__main__":
     main()
