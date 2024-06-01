@@ -88,7 +88,6 @@ class Matrix:
     def mul_vec(self, other):
         """Return the multiplication of a matrix by a vector"""
         if self.shape[1] != other.shape:
-            print("cant")
             return None
         return Vector(
             [
@@ -102,3 +101,17 @@ class Matrix:
         if self.shape[1] != other.shape[0]:
             print("cant")
             return None
+        return Matrix(
+            [
+                [
+                    sum(
+                        [
+                            self.data[i][k] * other.data[k][j]
+                            for k in range(self.shape[1])
+                        ]
+                    )
+                    for j in range(other.shape[1])
+                ]
+                for i in range(self.shape[0])
+            ]
+        )
