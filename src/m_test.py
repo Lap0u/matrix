@@ -114,6 +114,60 @@ def main():
 
     print(u.mul_mat(v))
 
+    print("\033[1m\033[96mEx08\033[0m")
+    # Square matrix trace
+    u = Matrix(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+        ]
+    )
+    print(u.trace())
+    u = Matrix(
+        [
+            [2.0, -5.0, 0.0],
+            [4.0, 3.0, 7.0],
+            [-2.0, 3.0, 4.0],
+        ]
+    )
+    print(u.trace())
+    u = Matrix(
+        [
+            [-2.0, -8.0, 4.0],
+            [1.0, -23.0, 4.0],
+            [0.0, 6.0, 4.0],
+        ]
+    )
+    print(u.trace())
+
+    print("\033[1m\033[96mEx09\033[0m")
+    # Transpose of a matrix
+    u = Matrix(
+        [
+            [1.0, 0.0],
+            [0.0, 2.0],
+        ]
+    )
+    print(u.transpose())
+    u = Matrix(
+        [
+            [2.0, -5.0, 0.0],
+            [4.0, 3.0, 7.0],
+            [-2.0, 3.0, 4.0],
+        ]
+    )
+    print(u.transpose())
+    u = Matrix(
+        [
+            [-2.0, -8.0, 4.0],
+            [1.0, -23.0, 4.0],
+            [0.0, 6.0, 4.0],
+        ]
+    )
+    print(u.transpose())
+    u = Matrix([[3, 1, 1], [2, 2, -3], [1, 1, 12], [0, 11, -5]])
+    print(u.transpose())
+
 
 if __name__ == "__main__":
     main()

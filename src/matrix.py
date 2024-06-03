@@ -115,3 +115,22 @@ class Matrix:
                 for i in range(self.shape[0])
             ]
         )
+
+    def trace(self):
+        """Return the trace of the matrix"""
+        if not self.is_square():
+            return None
+        return sum([self.data[i][i] for i in range(self.shape[0])])
+
+    def transpose(self):
+        """Return the transposed matrix"""
+        return Matrix(
+            [
+                [self.data[j][i] for j in range(self.shape[0])]
+                for i in range(self.shape[1])
+            ]
+        )
+
+    def row_echelon(self):
+        """Return the row echelon form of the matrix"""
+        # generate the algorithm that returns the row echelon form of the matrix
