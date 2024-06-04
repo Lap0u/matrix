@@ -131,6 +131,44 @@ class Matrix:
             ]
         )
 
+    def is_zero_column(self, i):
+        """Checks if the columns only contains zero"""
+        for j in range(self.shape[0]):
+            if self.data[j][i] != 0:
+                return False
+        return True
+
+    def put_one_to_topmost(self, i):
+        """Place the number 1 to the topmost position of
+        submatrix [i][i]"""
+        pivot = self.data[i][i]
+        if pivot == 0:
+            return
+        for j in range(self.shape[0] - i):
+            self.data[j + i][i] /= pivot
+
+    def remove_below_zeros(self, i):
+        pivot = self.data[i][i]
+        # print("pivot", pivot)
+        for j in range(self.shape[0] - i - 1):
+            if pivot == 0:
+                continue
+            ratio = self.data[j + i + 1][i] / pivot
+            for k in range(self.shape[1] - i):
+                # print(ratio, self.data[j + i + 1][k + i], self.data[i][k + i])
+                self.data[j + i + 1][k + i] -= ratio * self.data[i][k + i]
+        # print(self.data)
+
     def row_echelon(self):
-        """Return the row echelon form of the matrix"""
-        # generate the algorithm that returns the row echelon form of the matrix
+        """Return the row echelon form of the matrix
+        - Row echelon form of a matrix follows 3 rules
+        If a row does not consist entirely of zeros, the first nonzero number in the row is 1
+        - All zero rows are at the bottom of the matrix
+        - In any two consecutive rows that are not only zeros, the leading 1 in the lower row occurs farther to the right than the leading 1 in the higher row
+        """
+        for i in range(min(self.shape[0], self.shape[1])):
+            if self.is_zero_column(i):
+                continue
+            self.put_one_to_topmost(i)
+            self.remove_below_zeros(i)
+        return self.data
