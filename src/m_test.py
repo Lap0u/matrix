@@ -170,28 +170,28 @@ def main():
 
     print("\033[1m\033[96mEx10\033[0m")
     # Row echelon form of a matrix
-    u = Matrix(
-        [
-            [1.0, 0.0, 0.0],
-            [0.0, 1.0, 0.0],
-            [0.0, 0.0, 1.0],
-        ]
-    )
-    print(u.row_echelon())
-    u = Matrix(
-        [
-            [1.0, 2.0],
-            [3.0, 4.0],
-        ]
-    )
-    print(u.row_echelon())
-    u = Matrix(
-        [
-            [1.0, 2.0],
-            [2.0, 4.0],
-        ]
-    )
-    print(u.row_echelon())
+    # u = Matrix(
+    #     [
+    #         [1.0, 0.0, 0.0],
+    #         [0.0, 1.0, 0.0],
+    #         [0.0, 0.0, 1.0],
+    #     ]
+    # )
+    # print(u.row_echelon())
+    # u = Matrix(
+    #     [
+    #         [1.0, 2.0],
+    #         [3.0, 4.0],
+    #     ]
+    # )
+    # print(u.row_echelon())
+    # u = Matrix(
+    #     [
+    #         [1.0, 2.0],
+    #         [2.0, 4.0],
+    #     ]
+    # )
+    # print(u.row_echelon())
     u = Matrix(
         [
             [8.0, 5.0, -2.0, 4.0, 28.0],
@@ -200,14 +200,14 @@ def main():
         ]
     )
     print(u.row_echelon())
-    u = Matrix(
-        [
-            [8.0, 5.0],
-            [4.0, 2.5],
-            [8.0, 5.0],
-        ]
-    )
-    print(u.row_echelon())
+    # u = Matrix(
+    #     [
+    #         [8.0, 5.0],
+    #         [4.0, 2.5],
+    #         [8.0, 5.0],
+    #     ]
+    # )
+    # print(u.row_echelon())
 
 
 if __name__ == "__main__":

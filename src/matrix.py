@@ -142,21 +142,25 @@ class Matrix:
         """Place the number 1 to the topmost position of
         submatrix [i][i]"""
         pivot = self.data[i][i]
+
         if pivot == 0:
             return
-        for j in range(self.shape[0] - i):
-            self.data[j + i][i] /= pivot
+        for j in range(self.shape[1] - i):
+            self.data[i][i + j] /= pivot
 
     def remove_below_zeros(self, i):
         pivot = self.data[i][i]
+        print("bef", self.data, pivot)
         # print("pivot", pivot)
         for j in range(self.shape[0] - i - 1):
             if pivot == 0:
                 continue
             ratio = self.data[j + i + 1][i] / pivot
+            print(ratio)
             for k in range(self.shape[1] - i):
                 # print(ratio, self.data[j + i + 1][k + i], self.data[i][k + i])
                 self.data[j + i + 1][k + i] -= ratio * self.data[i][k + i]
+        print("af", self.data)
         # print(self.data)
 
     def row_echelon(self):
