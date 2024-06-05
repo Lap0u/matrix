@@ -131,37 +131,19 @@ class Matrix:
             ]
         )
 
-    def is_zero_column(self, i):
-        """Checks if the columns only contains zero"""
-        for j in range(self.shape[0]):
-            if self.data[j][i] != 0:
-                return False
-        return True
+    def row_swap(self, i, j):
+        """Swap two rows of the matrix"""
+        self.data[i], self.data[j] = self.data[j], self.data[i]
 
-    def put_one_to_topmost(self, i):
-        """Place the number 1 to the topmost position of
-        submatrix [i][i]"""
-        pivot = self.data[i][i]
+    def row_scale(self, i, scalar):
+        """Scale a row of the matrix"""
+        self.data[i] = [self.data[i][j] * scalar for j in range(self.shape[1])]
 
-        if pivot == 0:
-            return
-        for j in range(self.shape[1] - i):
-            self.data[i][i + j] /= pivot
-
-    def remove_below_zeros(self, i):
-        pivot = self.data[i][i]
-        print("bef", self.data, pivot)
-        # print("pivot", pivot)
-        for j in range(self.shape[0] - i - 1):
-            if pivot == 0:
-                continue
-            ratio = self.data[j + i + 1][i] / pivot
-            print(ratio)
-            for k in range(self.shape[1] - i):
-                # print(ratio, self.data[j + i + 1][k + i], self.data[i][k + i])
-                self.data[j + i + 1][k + i] -= ratio * self.data[i][k + i]
-        print("af", self.data)
-        # print(self.data)
+    def row_add(self, i, j, scalar):
+        """Add a multiple of one row to another row"""
+        self.data[j] = [
+            self.data[j][k] + scalar * self.data[i][k] for k in range(self.shape[1])
+        ]
 
     def row_echelon(self):
         """Return the row echelon form of the matrix
@@ -171,8 +153,14 @@ class Matrix:
         - In any two consecutive rows that are not only zeros, the leading 1 in the lower row occurs farther to the right than the leading 1 in the higher row
         """
         for i in range(min(self.shape[0], self.shape[1])):
-            if self.is_zero_column(i):
+            if self.data[i][i] == 0:
+                for j in range(i + 1, self.shape[0]):
+                    if self.data[j][i] != 0:
+                        self.row_swap(i, j)
+                        break
+            if self.data[i][i] == 0:
                 continue
-            self.put_one_to_topmost(i)
-            self.remove_below_zeros(i)
+            self.row_scale(i, 1 / self.data[i][i])
+            for j in range(i + 1, self.shape[0]):
+                self.row_add(i, j, -self.data[j][i])
         return self.data
