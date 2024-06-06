@@ -165,6 +165,31 @@ class Matrix:
                 offset += 1
                 continue
             self.row_scale(i - offset, 1 / self.data[i - offset][i])
-            for j in range(i + 1 - offset, self.shape[0]):
-                self.row_add(i - offset, j, -self.data[j][i])
+            for j in range(self.shape[0]):
+                if j != i - offset:
+                    self.row_add(i - offset, j, -self.data[j][i])
         return self.data
+
+    # This solution is provided by ChatGPT
+    # def row_echelon2(self):
+    #     """Return the reduced row echelon form of the matrix"""
+    #     row_count, col_count = self.shape
+    #     lead = 0
+    #     for r in range(row_count):
+    #         if lead >= col_count:
+    #             return self.data
+    #         i = r
+    #         while self.data[i][lead] == 0:  # loop col by col to find a leading 1
+    #             i += 1
+    #             if i == row_count:
+    #                 i = r
+    #                 lead += 1
+    #                 if lead == col_count:
+    #                     return self.data  # Return if no leading 1 is found
+    #         self.row_swap(i, r)
+    #         self.row_scale(r, 1 / self.data[r][lead])
+    #         for i in range(row_count):
+    #             if i != r:
+    #                 self.row_add(r, i, -self.data[i][lead])
+    #         lead += 1
+    #     return self.data
