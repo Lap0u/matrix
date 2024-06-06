@@ -199,6 +199,10 @@ def main():
             [8.0, 5.0, 1.0, 4.0, 17.0],
         ]
     )
+    import sympy
+
+    print(sympy.Matrix(u.data).rref())
+
     print(u.row_echelon())
     # u = Matrix(
     #     [

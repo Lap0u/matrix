@@ -152,15 +152,19 @@ class Matrix:
         - All zero rows are at the bottom of the matrix
         - In any two consecutive rows that are not only zeros, the leading 1 in the lower row occurs farther to the right than the leading 1 in the higher row
         """
-        for i in range(min(self.shape[0], self.shape[1])):
-            if self.data[i][i] == 0:
-                for j in range(i + 1, self.shape[0]):
+        offset = 0
+        for i in range(min(self.shape[1], self.shape[1])):
+            if i - offset >= self.shape[0]:
+                break
+            if self.data[i - offset][i] == 0:
+                for j in range(i + 1 - offset, self.shape[0]):
                     if self.data[j][i] != 0:
                         self.row_swap(i, j)
                         break
-            if self.data[i][i] == 0:
+            if self.data[i - offset][i] == 0:
+                offset += 1
                 continue
-            self.row_scale(i, 1 / self.data[i][i])
-            for j in range(i + 1, self.shape[0]):
-                self.row_add(i, j, -self.data[j][i])
+            self.row_scale(i - offset, 1 / self.data[i - offset][i])
+            for j in range(i + 1 - offset, self.shape[0]):
+                self.row_add(i - offset, j, -self.data[j][i])
         return self.data
