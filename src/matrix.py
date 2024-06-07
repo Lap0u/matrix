@@ -170,7 +170,7 @@ class Matrix:
                     self.row_add(i - offset, j, -self.data[j][i])
         return self.data
 
-    # This solution is provided by ChatGPT
+    # This solution was provided by ChatGPT
     # def row_echelon2(self):
     #     """Return the reduced row echelon form of the matrix"""
     #     row_count, col_count = self.shape
@@ -193,3 +193,30 @@ class Matrix:
     #                 self.row_add(r, i, -self.data[i][lead])
     #         lead += 1
     #     return self.data
+
+    def determinant_2x2(self, i, j, offset):
+        return (self.data[offset][i] * self.data[offset + 1][j]) - (
+            self.data[offset][j] * self.data[offset + 1][i]
+        )
+
+    def determinant_3x3(self, i, j, k, offset):
+        a = self.data[offset][i] * self.determinant_2x2(j, k, offset + 1)
+        b = self.data[offset][j] * self.determinant_2x2(i, k, offset + 1)
+        c = self.data[offset][k] * self.determinant_2x2(i, j, offset + 1)
+        return a - b + c
+
+    def determinant_4x4(self):
+        a = self.data[0][0] * self.determinant_3x3(1, 2, 3, offset=1)
+        b = self.data[0][1] * self.determinant_3x3(0, 2, 3, offset=1)
+        c = self.data[0][2] * self.determinant_3x3(0, 1, 3, offset=1)
+        d = self.data[0][3] * self.determinant_3x3(0, 1, 2, offset=1)
+        return a - b + c - d
+
+    def determinant(self):
+        if self.shape[0] > 4 or self.shape[1] > 4 or self.is_square() is False:
+            return None
+        if self.shape[0] == 2:
+            return self.determinant_2x2(0, 1, offset=0)
+        if self.shape[0] == 3:
+            return self.determinant_3x3(0, 1, 2, offset=0)
+        return self.determinant_4x4()

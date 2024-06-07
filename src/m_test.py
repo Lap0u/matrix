@@ -209,6 +209,41 @@ def main():
     )
     print(u.row_echelon())
 
+    print("\033[1m\033[96mEx11\033[0m")
+    # Determinant of a matrix
+    u = Matrix(
+        [
+            [1.0, -1.0],
+            [-1.0, 1.0],
+        ]
+    )
+    print(u.determinant())
+    u = Matrix(
+        [
+            [2.0, 0.0, 0.0],
+            [0.0, 2.0, 0.0],
+            [0.0, 0.0, 2.0],
+        ]
+    )
+    print(u.determinant())
+    u = Matrix(
+        [
+            [8.0, 5.0, -2.0],
+            [4.0, 7.0, 20.0],
+            [7.0, 6.0, 1.0],
+        ]
+    )
+    print(u.determinant())
+    u = Matrix(
+        [
+            [8.0, 5.0, -2.0, 4.0],
+            [4.0, 2.5, 20.0, 4.0],
+            [8.0, 5.0, 1.0, 4.0],
+            [28.0, -4.0, 17.0, 1.0],
+        ]
+    )
+    print(u.determinant())
+
 
 if __name__ == "__main__":
     main()
