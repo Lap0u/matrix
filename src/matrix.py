@@ -220,3 +220,10 @@ class Matrix:
         if self.shape[0] == 3:
             return self.determinant_3x3(0, 1, 2, offset=0)
         return self.determinant_4x4()
+
+    def inverse(self):
+        if self.is_square() is False:
+            return None
+        determinant = self.determinant()
+        if determinant == 0:
+            return None

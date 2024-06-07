@@ -244,6 +244,33 @@ def main():
     )
     print(u.determinant())
 
+    print("\033[1m\033[96mEx12\033[0m")
+    # Inverse of a matrix
+    u = Matrix(
+        [
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+        ]
+    )
+    print(u.inverse())
+    u = Matrix(
+        [
+            [2.0, 0.0, 0.0],
+            [0.0, 2.0, 0.0],
+            [0.0, 0.0, 2.0],
+        ]
+    )
+    print(u.inverse())
+    u = Matrix(
+        [
+            [8.0, 5.0, -2.0],
+            [4.0, 7.0, 20.0],
+            [7.0, 6.0, 1.0],
+        ]
+    )
+    print(u.inverse())
+
 
 if __name__ == "__main__":
     main()
