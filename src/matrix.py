@@ -284,3 +284,8 @@ class Matrix:
             for j in range(self.shape[1]):
                 adjugate_matrix.data[i][j] /= determinant
         return adjugate_matrix
+
+    def rank(self):
+        """Return the rank of the matrix"""
+        echelon = self.row_echelon()
+        return sum([1 for row in echelon if row.count(0) != self.shape[1]])
