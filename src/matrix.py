@@ -194,36 +194,58 @@ class Matrix:
     #         lead += 1
     #     return self.data
 
-    def determinant_2x2(self, i, j, offset):
-        return (self.data[offset][i] * self.data[offset + 1][j]) - (
-            self.data[offset][j] * self.data[offset + 1][i]
+    def determinant_sub_2(self, ignored_rows=[], ignored_cols=[]):
+        row = [i for i in range(self.shape[0]) if i not in ignored_rows]
+        col = [i for i in range(self.shape[1]) if i not in ignored_cols]
+        return (
+            self.data[row[0]][col[0]] * self.data[row[1]][col[1]]
+            - self.data[row[0]][col[1]] * self.data[row[1]][col[0]]
         )
 
-    def determinant_3x3(self, i, j, k, offset):
-        a = self.data[offset][i] * self.determinant_2x2(j, k, offset + 1)
-        b = self.data[offset][j] * self.determinant_2x2(i, k, offset + 1)
-        c = self.data[offset][k] * self.determinant_2x2(i, j, offset + 1)
+    def determinant_sub_3(self, ignored_rows=[], ignored_cols=[]):
+        row = [i for i in range(self.shape[0]) if i not in ignored_rows]
+        col = [i for i in range(self.shape[1]) if i not in ignored_cols]
+        print(row, col)
+        a = self.data[row[0]][col[0]] * self.determinant_sub_2(
+            ignored_rows + [row[0]], ignored_cols + [col[0]]
+        )
+        b = self.data[row[0]][col[1]] * self.determinant_sub_2(
+            ignored_rows + [row[0]], ignored_cols + [col[1]]
+        )
+        c = self.data[row[0]][col[2]] * self.determinant_sub_2(
+            ignored_rows + [row[0]], ignored_cols + [col[2]]
+        )
         return a - b + c
 
-    def determinant_4x4(self):
-        a = self.data[0][0] * self.determinant_3x3(1, 2, 3, offset=1)
-        b = self.data[0][1] * self.determinant_3x3(0, 2, 3, offset=1)
-        c = self.data[0][2] * self.determinant_3x3(0, 1, 3, offset=1)
-        d = self.data[0][3] * self.determinant_3x3(0, 1, 2, offset=1)
+    def determinant_sub_4(self):
+        a = self.data[0][0] * self.determinant_sub_3(ignored_rows=[0], ignored_cols=[0])
+        b = self.data[0][1] * self.determinant_sub_3(ignored_rows=[0], ignored_cols=[1])
+        c = self.data[0][2] * self.determinant_sub_3(ignored_rows=[0], ignored_cols=[2])
+        d = self.data[0][3] * self.determinant_sub_3(ignored_rows=[0], ignored_cols=[3])
         return a - b + c - d
 
     def determinant(self):
         if self.shape[0] > 4 or self.shape[1] > 4 or self.is_square() is False:
             return None
         if self.shape[0] == 2:
-            return self.determinant_2x2(0, 1, offset=0)
+            return self.determinant_sub_2()
         if self.shape[0] == 3:
-            return self.determinant_3x3(0, 1, 2, offset=0)
-        return self.determinant_4x4()
+            return self.determinant_sub_3()
+        return self.determinant_sub_4()
+
+    def minors_matrix(self):
+        pass
 
     def inverse(self):
         if self.is_square() is False:
             return None
+        if self.shape[0] > 4:
+            print(
+                "Matrix is too large to compute the inverse since we cannot compute the determinant"
+            )
+            return None
         determinant = self.determinant()
         if determinant == 0:
+            print("Matrix is singular, inverse does not exist")
             return None
+        minors_matrix = self.minors_matrix()
