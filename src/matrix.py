@@ -205,7 +205,6 @@ class Matrix:
     def determinant_sub_3(self, ignored_rows=[], ignored_cols=[]):
         row = [i for i in range(self.shape[0]) if i not in ignored_rows]
         col = [i for i in range(self.shape[1]) if i not in ignored_cols]
-        print(row, col)
         a = self.data[row[0]][col[0]] * self.determinant_sub_2(
             ignored_rows + [row[0]], ignored_cols + [col[0]]
         )
@@ -233,8 +232,38 @@ class Matrix:
             return self.determinant_sub_3()
         return self.determinant_sub_4()
 
+    def minors_sub_3(self):
+        return [
+            [
+                self.determinant_sub_2(ignored_rows=[i], ignored_cols=[j])
+                for j in range(self.shape[1])
+            ]
+            for i in range(self.shape[0])
+        ]
+
+    def minors_sub_4(self):
+        return [
+            [
+                self.determinant_sub_3(ignored_rows=[i], ignored_cols=[j])
+                for j in range(self.shape[1])
+            ]
+            for i in range(self.shape[0])
+        ]
+
     def minors_matrix(self):
-        pass
+        if self.shape[0] > 4 or self.shape[1] > 4:
+            return None
+        if self.shape[0] == 2:
+            return self.determinant_sub_2()
+        if self.shape[0] == 3:
+            return self.minors_sub_3()
+        return self.minors_sub_4()
+
+    def cofactor_matrix(self, minors_matrix):
+        return [
+            [minors_matrix[i][j] * (-1) ** (i + j) for j in range(self.shape[1])]
+            for i in range(self.shape[0])
+        ]
 
     def inverse(self):
         if self.is_square() is False:
@@ -249,3 +278,9 @@ class Matrix:
             print("Matrix is singular, inverse does not exist")
             return None
         minors_matrix = self.minors_matrix()
+        cofactor_matrix = Matrix(self.cofactor_matrix(minors_matrix))
+        adjugate_matrix = cofactor_matrix.transpose()
+        for i in range(self.shape[0]):
+            for j in range(self.shape[1]):
+                adjugate_matrix.data[i][j] /= determinant
+        return adjugate_matrix
